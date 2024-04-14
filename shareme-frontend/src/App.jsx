@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Login from "./components/Login";
-import Home from "./container/Home";
+import Login from "./components/Login.jsx";
+import Home from "./container/Home.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function App() {

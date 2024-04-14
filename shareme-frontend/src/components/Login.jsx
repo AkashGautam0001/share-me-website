@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
 import { jwtDecode } from "jwt-decode";
+import { client } from "../client.js";
 
 const Login = () => {
 	const clientID = import.meta.env.VITE_APP_GOOGLE_API_CLIENT_ID;
@@ -23,8 +24,10 @@ const Login = () => {
 			image: picture,
 		};
 
-		console.log(doc);
-		navigate("/");
+		// console.log(doc);
+		client.createIfNotExists(doc).then(() => {
+			navigate("/", { replace: true });
+		});
 	};
 
 	const handleError = () => {
