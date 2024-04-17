@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import shareVideo from "../assets/share.mp4";
-import logo from "../assets/logowhite.png";
+import logo from "../assets/shareme_banner.png";
 import { jwtDecode } from "jwt-decode";
 import { client } from "../client.js";
 
@@ -16,7 +16,6 @@ const Login = () => {
 
 		localStorage.setItem("user", JSON.stringify(profileObj));
 
-		// Prepare document for navigation
 		const doc = {
 			_id: sub,
 			_type: "user",
@@ -24,7 +23,7 @@ const Login = () => {
 			image: picture,
 		};
 
-		// console.log(doc);
+		console.log(doc);
 		client.createIfNotExists(doc).then(() => {
 			navigate("/", { replace: true });
 		});
@@ -35,7 +34,7 @@ const Login = () => {
 	};
 	return (
 		<>
-			<div className="flex justify-center items-center flex-col h-screen">
+			<div className="flex justify-center items-center flex-col h-screen ">
 				<div className="relative w-full h-full">
 					<video
 						src={shareVideo}
@@ -44,23 +43,29 @@ const Login = () => {
 						controls={false}
 						muted
 						autoPlay
-						className="w-full h-full object-cover"
+						className="w-full h-full object-cover opacity-80"
 					/>
-					<div className="absolute flex flex-col justify-center items-center left-0 right-0 top-0 bottom-0">
+					<div className="absolute flex flex-col justify-center items-center left-0 right-0 top-36">
 						<div className="p-5">
 							<img
 								src={logo}
-								width="130px"
+								width="500px"
 								alt="logo"
 							/>
 						</div>
 					</div>
-					<div className="absolute flex flex-col justify-center items-center left-0 right-0 bottom-56">
-						<GoogleLogin
-							clientId={clientID}
-							onSuccess={handleSuccess}
-							onError={handleError}
-						/>
+					<div className="absolute flex flex-col justify-center items-center left-0 right-0 bottom-60">
+						<div className="absolute z-1 p-2">
+							<GoogleLogin
+								clientId={clientID}
+								onSuccess={handleSuccess}
+								onError={handleError}
+								size="large"
+								width={180}
+								theme="filled_black"
+								shape="rectangular"
+							/>
+						</div>
 					</div>
 				</div>
 			</div>

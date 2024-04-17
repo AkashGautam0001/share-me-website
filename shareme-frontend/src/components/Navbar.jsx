@@ -7,8 +7,8 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
 	return (
 		<div className="flex gap-2 md:gap-5 w-full mt-5 pb-7">
 			<div
-				className="flex justify-start items-center w-full px-2 rounded-md bg-white border-none outline-none
-			focus-within:shadow-sm"
+				className="flex ml-4 justify-start items-center w-full px-2 rounded-md bg-white border-gray-100 outline-none border-2
+				focus-within:shadow-sm focus:border-gray-300"
 			>
 				<IoMdSearch
 					fontSize={21}
@@ -36,7 +36,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
 				</Link>
 				<Link
 					to={`create-pin`}
-					className="bg-black text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex justify-center items-center"
+					className="bg-red-900 text-white rounded-lg w-12 h-12 md:w-14 md:h-12 flex justify-center items-center"
 				>
 					<IoMdAdd />
 				</Link>

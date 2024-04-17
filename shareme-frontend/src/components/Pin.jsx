@@ -12,8 +12,14 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
 	const navigate = useNavigate();
 	const user = fetchUser();
 
+	const deletePin = (id) => {
+		client.delete(id).then(() => {
+			window.location.reload();
+		});
+	};
+
 	const alreadySaved = !!save?.filter(
-		(item) => item.postedBy._id === user.sub
+		(item) => item?.postedBy?._id === user?.sub
 	)?.length;
 
 	const savePin = (id) => {
@@ -24,10 +30,10 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
 				.insert("after", "save[-1]", [
 					{
 						_key: uuidv4(),
-						userId: user.sub,
+						userId: user?.sub,
 						postedBy: {
 							_type: "postedBy",
-							_ref: user.sub,
+							_ref: user?.sub,
 						},
 					},
 				])
@@ -93,15 +99,15 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
 									href={destination}
 									target="_blank"
 									rel="noreferrer"
-									className="bg-white flex justify-center  items-center gap-2 text-black font-bold p-2 pl-2 pr-4 rounded-full opacity-70 hover:100 hover:shadow-md"
+									className="bg-white flex justify-center  items-center gap-2 text-black font-bold p-2 pl-2 pr-2 rounded-full opacity-70 hover:100 hover:shadow-md"
 								>
 									<BsFillArrowUpRightCircleFill />
-									{destination.length > 20
-										? destination.slice(8, 17)
-										: destination.slice(8)}
+									{destination.length > 15
+										? `${destination.slice(8, 16)}...`
+										: destination}
 								</a>
 							)}
-							{postedBy?._id === user.sub && (
+							{postedBy?._id === user?.sub && (
 								<button
 									type="button"
 									onClick={(e) => {

@@ -19,21 +19,21 @@ const CreatePin = ({ user }) => {
 
 	const navigate = useNavigate();
 	const uploadImage = (e) => {
-		const selectedFile = e.target.files[0];
+		const { type, name } = e.target.files[0];
 		// uploading asset to sanity
 		if (
-			selectedFile.type === "image/png" ||
-			selectedFile.type === "image/svg" ||
-			selectedFile.type === "image/jpeg" ||
-			selectedFile.type === "image/gif" ||
-			selectedFile.type === "image/tiff"
+			type === "image/png" ||
+			type === "image/svg" ||
+			type === "image/jpeg" ||
+			type === "image/gif" ||
+			type === "image/tiff"
 		) {
 			setWrongImageType(false);
 			setLoading(true);
 			client.assets
-				.upload("image", selectedFile, {
-					contentType: selectedFile.type,
-					filename: selectedFile.name,
+				.upload("image", e.target.files[0], {
+					contentType: type,
+					filename: name,
 				})
 				.then((document) => {
 					setImageAsset(document);
@@ -92,7 +92,7 @@ const CreatePin = ({ user }) => {
 						{wrongImageType && <p>Wrong image type</p>}
 						{!imageAsset ? (
 							<label>
-								<div className="flex flex-col items-center justify-center h-full">
+								<div className="flex flex-col items-center justify-center h-full cursor-pointer">
 									<div className="flex flex-col items-center justify-center">
 										<p className="font-bold text-2xl">
 											<AiOutlineCloudUpload />
@@ -102,7 +102,7 @@ const CreatePin = ({ user }) => {
 										</p>
 									</div>
 									<p className="mt-32 text-gray-400">
-										Recommendation : use high-quality JPG,
+										Recommendation : Use high-quality JPG,
 										SVG, PNG, GIF or TIFF less the 20MB
 									</p>
 								</div>
@@ -135,7 +135,7 @@ const CreatePin = ({ user }) => {
 					<input
 						type="text"
 						value={title}
-						placeholder="what is your Title"
+						placeholder="Write title..."
 						onChange={(e) => setTitle(e.target.value)}
 						className="outline-none text-2xl sm:text-3xl font-bold border-b-2 border-gray-200 p-2"
 					/>
@@ -153,7 +153,7 @@ const CreatePin = ({ user }) => {
 						type="text"
 						value={about}
 						onChange={(e) => setAbout(e.target.value)}
-						placeholder="what is your pin about"
+						placeholder="What is your pin about ?"
 						className="outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2"
 					/>
 					<input
@@ -190,7 +190,7 @@ const CreatePin = ({ user }) => {
 							<button
 								type="button"
 								onClick={savePin}
-								className="bg-red-500 text-white font-bold p-2 rounded-full outline-none w-28"
+								className="bg-red-900 text-white font-bold p-2 rounded-md outline-none w-28 hover:bg-red-700"
 							>
 								Save Pin
 							</button>
