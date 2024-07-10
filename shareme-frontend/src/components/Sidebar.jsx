@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
 import { IoIosArrowForward } from "react-icons/io";
 
-import logo from "../assets/shareme_banner.png";
+import logo from "../assets/pictahub.png";
 import { categories } from "../utils/data";
 
 const Sidebar = ({ user, closeToggle }) => {

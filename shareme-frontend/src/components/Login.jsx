@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import shareVideo from "../assets/share.mp4";
-import logo from "../assets/shareme_banner.png";
+import logo from "../assets/pictahub.png";
 import { jwtDecode } from "jwt-decode";
 import { client } from "../client.js";
 
